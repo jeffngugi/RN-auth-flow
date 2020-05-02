@@ -1,20 +1,26 @@
 import React, {useState} from 'react'
-import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
 
 
 
-const Login = ({navigation}) => {
+
+const Register = ({navigation}) => {
   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
     //functions
-    const userLogin = ()=>{
+    const userRegister = ()=>{
+      //Perform verications->white verification logics here
         if(name == '' || email === '' || password === ''){
-            Alert.alert('Credentials required', 'Enter your login details')
+            Alert.alert('Credentials required', 'Enter your ')
         }else{
             console.log({email, password, name})
+            //write codes to see if user was registered
+            //then if succesfull
+            navigation.navigate('Login')
+            
         }
     }
     
@@ -47,8 +53,8 @@ const Login = ({navigation}) => {
 
         <Button
           color="#3740FE"
-          title="Signin"
-          onPress={() => userLogin()}
+          title="Register"
+          onPress={() => userRegister()}
         />
 
         <Text style={{marginTop:10}}>Registered ?</Text>
@@ -81,4 +87,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Login
+export default Register;

@@ -1,12 +1,35 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native';
+import {connect} from 'react-redux';
 
-const Home = () => {
+const Home = ({auth}) => {
+    
+    // console.log(auth);
+    // console.log(auth.user);
+    
     return (
-        <View>
+        <View style={styles.container}>
             <Text>This is the home screen</Text>
+             <Text style={styles.userWelcome}>Welcome back: {auth.user.email}</Text>
         </View>
     )
 }
 
-export default Home
+
+const styles = StyleSheet.create({
+    container:{
+        alignContent:'center',
+        display:'flex',
+        marginHorizontal:12
+    },
+    userWelcome:{
+        fontSize:25,
+        fontWeight:'bold',
+        paddingVertical:29
+    }
+})
+const mapStateToProps = (state) =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps) (Home)

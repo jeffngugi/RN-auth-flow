@@ -12,10 +12,11 @@ const Login = ({navigation, login}) => {
     //functions
     const userLogin = ()=>{
         if(email === '' || password === ''){
+            //Perform data verifications.
             Alert.alert('Credentials required', 'Enter your login details')
         }else{
             const userData = {email, password}
-            console.log(userData)
+            // console.log(userData)
             login(userData);
         }
     }
