@@ -1,13 +1,18 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import {connect} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
+
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 
 const Stack = createStackNavigator();
 
-const InitialNavStack = () => {
+const InitialNavStack = ({auth, navigation }) => {
+    console.log(auth);  
+    const {isAuthenticated} = auth;
+    console.log(isAuthenticated);
     return (
         <Stack.Navigator
             screenOptions={{
@@ -21,6 +26,8 @@ const InitialNavStack = () => {
                 }
             }}
         >
+            {!isAuthenticated ?
+            <>
             <Stack.Screen 
                 name='Login'
                 component={Login}
@@ -31,13 +38,22 @@ const InitialNavStack = () => {
                 component={Register}
                 options={{title:'Register'}}
             />
+           
+          
+            </>
+            :
             <Stack.Screen 
                 name='Home'
                 component={Home}
                 options={{title:'Kejalist'}}
             />
+}
         </Stack.Navigator>
     )
 }
 
-export default InitialNavStack
+const mapStateToProps = (state) =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps) (InitialNavStack)
